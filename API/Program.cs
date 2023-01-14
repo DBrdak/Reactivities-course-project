@@ -1,3 +1,4 @@
+using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -9,14 +10,8 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddDbContext<DataContext>(opt =>
-        {
-            opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-        });
-
         builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddAppliCollection(builder.Configuration);
 
         var app = builder.Build();
 
@@ -25,6 +20,8 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        app.UseCors("CorsPolicy");
 
         app.UseAuthorization();
 
@@ -41,8 +38,8 @@ public class Program
         }
         catch (Exception ex)
         {
-            //var logger = services.GetRequiredService<ILogger>();
-            //logger.LogError(ex.Message, "Error occured during migration");
+            var logger = services.GetRequiredService<ILogger>();
+            logger.LogError(ex.Message, "Error occured during migration");
         }
 
         await app.RunAsync();

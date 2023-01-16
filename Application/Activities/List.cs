@@ -24,8 +24,6 @@ namespace Application.Activities
 
             public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
             {
-                _logger.LogInformation("Hi");
-
                 return await _context.Activities.ToListAsync(cancellationToken);
             }
         }

@@ -7,7 +7,7 @@ namespace Application.Activities
 {
     public class Edit
     {
-        public class Command : IRequest<Command>, IRequest<Unit>
+        public class Command : IRequest
         {
             public Activity Activity { get; set; }
             public Guid Id { get; set; }

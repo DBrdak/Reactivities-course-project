@@ -59,12 +59,14 @@ namespace API.Controllers
 
             if (isUserNameTaken)
             {
-                return BadRequest("Username is already taken");
+                ModelState.AddModelError("username", "Username taken");
+                return ValidationProblem();
             }
 
             if (isEmailTaken)
             {
-                return BadRequest("Email is already taken");
+                ModelState.AddModelError("email", "Email taken");
+                return ValidationProblem();
             }
 
             var user = new AppUser

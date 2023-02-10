@@ -56,9 +56,9 @@ function ProfilePhotos({profile}:Props) {
                       basic 
                       color='green'
                       content='Main'
-                      name={'main'+photo.id}
+                      name={'main' + photo.id}
                       disabled={photo.isMain}
-                      loading={'main'+target === photo.id && loading}
+                      loading={target === 'main' + photo.id && loading}
                       onClick={e => handleSetMainPhoto(photo, e)}
                       />
                       <Button 

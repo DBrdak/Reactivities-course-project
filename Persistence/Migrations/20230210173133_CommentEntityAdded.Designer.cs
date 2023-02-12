@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -10,9 +11,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230210173133_CommentEntityAdded")]
+    partial class CommentEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
@@ -161,7 +164,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comment");
                 });
 
             modelBuilder.Entity("Domain.Photo", b =>
@@ -336,8 +339,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Activity", "Activity")
                         .WithMany("Comments")
-                        .HasForeignKey("ActivityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ActivityId");
 
                     b.HasOne("Domain.AppUser", "Author")
                         .WithMany()

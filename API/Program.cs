@@ -59,7 +59,7 @@ public class Program
         }
         catch (Exception ex)
         {
-            var logger = services.GetRequiredService<ILogger>();
+            var logger = services.GetRequiredService<ILogger<Program>>();
             logger.LogError(ex.Message, "Error occured during migration");
         }
 

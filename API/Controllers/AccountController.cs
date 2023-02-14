@@ -39,7 +39,7 @@ namespace API.Controllers
 
             if (user == null)
             {
-                return Unauthorized();
+                return BadRequest();
             }
 
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
@@ -49,7 +49,7 @@ namespace API.Controllers
                 return CreateUserObject(user);
             }
 
-            return Unauthorized();
+            return BadRequest();
         }
 
         [AllowAnonymous]

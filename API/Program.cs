@@ -22,6 +22,7 @@ public class Program
             var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
             options.Filters.Add(new AuthorizeFilter(policy));
         });
+
         builder.Services.AddAppliCollection(builder.Configuration);
         builder.Services.AddIdentityServices(builder.Configuration);
 

@@ -7,7 +7,7 @@ export default function TestErrors() {
     const [errors, setErrors] = useState(null);
 
     function handleNotFound() {
-        axios.get('/buggy/not-found').catch(err => console.log(err.response));
+        axios.get('/not-found').catch(err => console.log(err.response));
     }
 
     function handleBadRequest() {

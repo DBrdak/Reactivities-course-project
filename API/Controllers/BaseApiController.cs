@@ -26,7 +26,7 @@ namespace API.Controllers
                 return Ok(result.Value);
             }
 
-            if (result.IsSuccess && result.Value != null)
+            if (!result.IsSuccess && result.Value != null)
             {
                 return NotFound();
             }

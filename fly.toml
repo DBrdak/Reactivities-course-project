@@ -1,6 +1,6 @@
-# fly.toml file generated for reactivities-dbrdak on 2023-02-14T19:03:04+01:00
+# fly.toml file generated for ractivities-dbrdak on 2023-02-22T15:49:39+01:00
 
-app = "reactivities-dbrdak"
+app = "ractivities-dbrdak"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
@@ -9,9 +9,9 @@ processes = []
   image = "dbrdak/reactivities:latest"
 
 [env]
-  ASPNETCORE_URLS="http://+:8080"
-  Cloudinary__CloudName="dw0bfgpfj"
-  Cloudinary__ApiKey="437459292324761"
+  ASPNETCORE_URLS = "http://+:8080"
+  Cloudinary__ApiKey = "437459292324761"
+  Cloudinary__CloudName = "dw0bfgpfj"
 
 [experimental]
   auto_rollback = true

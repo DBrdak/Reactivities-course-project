@@ -122,7 +122,10 @@ $@"<p>Please click the below link to verify your email address:</p>
         {
             var user = await _userManager.FindByEmailAsync(email);
 
-            if (user is null) return Unauthorized();
+            if (user is null)
+                return Unauthorized();
+            if (user.EmailConfirmed)
+                return BadRequest("Email is already verified");
 
             var decodedTokenBytes = WebEncoders.Base64UrlDecode(token);
             var decodedToken = Encoding.UTF8.GetString(decodedTokenBytes);
@@ -141,6 +144,8 @@ $@"<p>Please click the below link to verify your email address:</p>
 
             if (user is null)
                 return Unauthorized();
+            if (user.EmailConfirmed)
+                return BadRequest("Email is already verified");
 
             var origin = Request.Headers["origin"];
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);

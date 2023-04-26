@@ -32,6 +32,7 @@ namespace API.Extensions
                 options.SignIn.RequireConfirmedEmail = true;
             })
                 .AddEntityFrameworkStores<DataContext>()
+                .AddSignInManager<SignInManager<AppUser>>()
                 .AddDefaultTokenProviders();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

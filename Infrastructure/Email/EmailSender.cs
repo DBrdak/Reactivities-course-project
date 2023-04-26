@@ -18,7 +18,7 @@ namespace Infrastructure.Email
             _config = config;
         }
 
-        public async Task SendEmailAsync(string userEmail, string emailSubject, string emailBody)
+        public async Task<bool> SendEmailAsync(string userEmail, string emailSubject, string emailBody)
         {
             var client = new SendGridClient(_config["Sendgrid:Key"]);
             var message = new SendGridMessage
@@ -30,7 +30,7 @@ namespace Infrastructure.Email
             };
             message.AddTo(new EmailAddress(userEmail));
 
-            await client.SendEmailAsync(message);
+            return (await client.SendEmailAsync(message)).IsSuccessStatusCode;
         }
     }
 }

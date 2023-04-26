@@ -39,7 +39,7 @@ namespace API.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(authenticationSettings.JwtExpireDays),
+                Expires = DateTime.UtcNow.AddMinutes(authenticationSettings.JwtExpireMinutes),
                 SigningCredentials = creds
             };
 
@@ -49,31 +49,13 @@ namespace API.Services
 
             return tokenHandler.WriteToken(token);
         }
+
+        public RefreshToken GeneRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return new RefreshToken { Token = Convert.ToBase64String(randomNumber) };
+        }
     }
-
-    //public string CreateToken(AppUser user, AuthenticationSettings authenticationSettings)
-    //{
-    //    var claims = new List<Claim>
-    //        {
-    //            new Claim(ClaimTypes.Name, user.UserName),
-    //            new Claim(ClaimTypes.NameIdentifier, user.Id),
-    //            new Claim(ClaimTypes.Email, user.Email)
-    //        };
-
-    //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey));
-    //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-    //    var tokenDescriptor = new SecurityTokenDescriptor
-    //    {
-    //        Subject = new ClaimsIdentity(claims),
-    //        Expires = DateTime.UtcNow.AddDays(authenticationSettings.JwtExpireDays),
-    //        SigningCredentials = creds
-    //    };
-
-    //    var tokenHandler = new JwtSecurityTokenHandler();
-
-    //    var token = tokenHandler.CreateToken(tokenDescriptor);
-
-    //    return tokenHandler.WriteToken(token);
-    //}
 }
